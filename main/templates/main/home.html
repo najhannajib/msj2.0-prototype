@@ -1,0 +1,86 @@
+{%extends 'main/base.html'%}
+
+
+{%block content%}
+<br>
+<br>
+<div class="container">
+    <h2 class="text-white mb-4">News & Update on COVID-19</h2>
+
+    <div class="row">
+
+       
+        <div class="col-md-8">
+
+            {% if user.username == "cubaan" %}
+            <div class="jumbotron p-3">
+                <h3>Hello, {{user.username}}</h3>
+                <p class="lead">Any Update on Covid-19 cases?
+                </p>
+                <hr class="my-4">
+
+                <div style="margin-left: auto; margin-right:auto">
+                    <a class="btn btn-sm btn-success mb-4 mr-3 " href="{% url 'create' %}">
+                        New post
+                    </a>
+                </div>
+
+            </div>
+            {% endif %}
+
+            {% for post in posts %}
+
+            <div class="card mb-3">
+                <div class="card-header p-3">
+                    <h5> Covid-19 Update</h5>
+                    <p>{{post.date_posted}} - MySejahtera 2.0 Admin</p>
+                </div>
+                <div class="card-body">
+                    <p>{{post.text}}</p>
+                    <!-- <p class="card-text">{{post.text}}</p> -->
+
+                    {% if user.username == 'admin' %}
+                    <a class="btn btn-sm btn-info ml-2" style="font-size: 14px"
+                        href="{% url 'post-update' post.id %}">Update</a>
+                    <a class="btn btn-sm btn-danger ml-2" style="font-size: 14px"
+                        href="{% url 'post-delete' post.id %}">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h1>#staysafe #kitajagakita</h1>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h4> Location History</h4>
+                    <!-- <p>{{post.date_posted}}</p> -->
+                    <a  href="{% url 'location' %}">
+                        Add New Location
+                      </a>
+                </div>
+                <div class="card-body">
+                    {% for loc in location %}
+                    <!-- <h5 class="card-title">{{post.text}}</h5> -->
+                    <p>{{loc.city }} - {{loc.author }} </p>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{%endblock content%}

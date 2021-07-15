@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% block content %}
+<div class="container pt-4" style="height: 800px;">
+    <form method="POST" class="col-6 no-padding">
+        {% csrf_token %}
+        <fieldset class="form-group text-white">
+            Do you really want to delete
+        </fieldset>
+        <p class="bg-steel p-2 text-white"
+           style="border: 1px solid white; border-radius: 4px; word-wrap: break-word;">
+           {{ post.text }}
+        </p>
+        <div class="form-group">
+            <button class="btn btn-sm btn-success" type="submit">Yes</button>
+            <a class="btn btn-sm btn-danger" aria-current="page" href="{% url 'home' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock content %}

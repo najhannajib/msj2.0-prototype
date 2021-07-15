@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+
+<div class="container text-center">
+
+    <div class="row d-flex justify-content-center p-3">
+        <div class="col-md-6 card">
+            <div class="card-body d-flex justify-content-center p-4">
+                <div class="col-sm-8 text-left">
+                    <h3 align="center">Your Location</h3>
+                    <!-- <p align="center">{{ data }}</p> -->
+                    <p align="center">
+                    <ul>
+                        <li>Country: {{ data.country }}</li>
+                        <li>state: {{ data.regionName }}</li>
+                        <li>City: {{ data.city }}</li>
+                        <li>Zip: {{ data.zip }}</li>
+                        <li>Latitude: {{ data.lat }}</li>
+                        <li>Longitude: {{ data.lon }}</li>
+                        <li>Country Code: {{ data.countryCode }}</li>
+                        <li>Timezone: {{ data.timezone }}</li>
+                    </ul>
+                    </p>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center p-3">
+        <div class="col-md-6 d-flex justify-content-end">
+            <a href="{% url 'locationsubmit' %}"><button class="btn btn-success">Submit Location</button> </a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}

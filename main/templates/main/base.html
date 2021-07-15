@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <title>MySejahtera</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}?{% now 'U' %}" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/5e4a964698.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <div id="mySidebar" class="sidebar">
+
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+    <a class="" href="{% url 'home' %}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+
+    <a class="" href="#"></a>
+
+    <a class="" href="{% url 'profile' %}"><i class="fas fa-id-badge"></i> Profile</a>
+
+    <a href="{% url 'health' %}">
+
+      <i class="fas fa-heartbeat"></i> Health Info
+
+    </a>
+
+    <a href="{% url 'vaccine' %}">
+      <i class="fas fa-syringe"></i> Vaccine
+    </a>
+
+    <a href="{% url 'qrcode' %}">
+      <i class="fas fa-qrcode"></i> QR Code
+    </a>
+
+  </div>
+
+
+  <div id="main" class="content ml-0">
+
+    <header class="site-header">
+      <nav style="border-bottom: 1px solid rgba(255, 255, 255, 0.1)"
+          class="navbar navbar-expand navbar-dark bg-steel navbar-topstay">
+          <div class="container">
+              <div class="collapse navbar-collapse" id="navbarToggle">
+                  <div class="navbar-nav mr-auto pl-2">
+                      <a class="nav-item nav-link" style="font-size: 30px;" href="{% url 'home' %}"><i
+                              class="fas fa-globe-asia"></i> MySejahtera 2.0</a>
+
+
+                  </div>
+                  <div class="navbar-nav pr-2">
+
+
+                      <a class="nav-item nav-link" href="{% url 'home' %}"><i class="fas fa-info-circle"></i>
+                      </a>
+                      {% if user.is_authenticated %}
+                      <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-cog"></i></a>
+                      <a class="nav-item nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a>
+                      {% else %}
+                      <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                      <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                      {% endif %}
+                  </div>
+              </div>
+          </div>
+      </nav>
+  </header>
+
+    <button class="openbtn" onclick="openNav()">☰</button>
+    {%block content%}
+    <!-- <h3>Base Page</h3> -->
+
+    {%endblock content%}
+  </div>
+</body>
+<script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }
+</script>
+</html>
+
