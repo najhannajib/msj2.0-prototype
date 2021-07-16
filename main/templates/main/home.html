@@ -1,6 +1,5 @@
 {%extends 'main/base.html'%}
-
-
+{% load crispy_forms_tags %}
 {%block content%}
 <br>
 <br>
@@ -12,16 +11,16 @@
        
         <div class="col-md-8">
 
-            {% if user.username == "cubaan" %}
+            {% if user.username == "najhannajib" %}
             <div class="jumbotron p-3">
-                <h3>Hello, {{user.username}}</h3>
-                <p class="lead">Any Update on Covid-19 cases?
+                <h3>Hello, {{user.username}}, admin of MySejahtera 2.0</h3>
+                <p class="lead">Any Update?
                 </p>
                 <hr class="my-4">
 
                 <div style="margin-left: auto; margin-right:auto">
                     <a class="btn btn-sm btn-success mb-4 mr-3 " href="{% url 'create' %}">
-                        New post
+                        New update
                     </a>
                 </div>
 
@@ -37,7 +36,6 @@
                 </div>
                 <div class="card-body">
                     <p>{{post.text}}</p>
-                    <!-- <p class="card-text">{{post.text}}</p> -->
 
                     {% if user.username == 'admin' %}
                     <a class="btn btn-sm btn-info ml-2" style="font-size: 14px"

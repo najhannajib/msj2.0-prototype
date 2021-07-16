@@ -4,11 +4,11 @@ from django.db.models import fields
 from django.http import request
 from django.shortcuts import redirect, render
 from django.views.generic.edit import DeleteView, UpdateView
-from .models import post, location_qr, geolocation
+from .models import post, location_qr, geolocation, post2
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, CreateView
-from .forms import healthupdateform, vaccineform, qrcreateform
+from .forms import healthupdateform, vaccineform, qrcreateform, post2form
 from django.contrib.auth.models import User
 import sys
 from django.db.models import Count
@@ -30,15 +30,6 @@ def is_users(post_user, logged_user):
 PAGINATION_COUNT = 3
 
 
-# class home(LoginRequiredMixin, ListView):
-#     model = post
-#     template_name = 'main/home.html'
-#     ordering = ['-date_posted']
-
-    
-        
-
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = post
     fields = ['text']
@@ -48,6 +39,24 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+# class PostNewsView(LoginRequiredMixin, CreateView ):
+#     model = post2
+#     fields = [
+#             'date',
+#             'new',
+#             'cured',
+#             'totalcases',
+#             'newdeath',
+#             'totaldeath'
+#         ]
+#     template_name = 'main/newcases.html'
+#     success_url = '/'
+
+#     def form2_valid(self, form):
+#         form2.instance.author = self.request.user
+#         return super().form2_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -78,6 +87,23 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return is_users(self.get_object().author, self.request.user)
 
+#test 
+
+def post2view(request):
+    return render(request, 'main/home.html')
+
+
+def post2(request):
+    if (request.method == 'POST'):
+        p2form = post2form(
+            request.POST, request.FILES, instance=request.user.post2)
+        if p2form.is_valid:
+            p2form.save()
+            return redirect('post2')
+    else:
+        p2form = post2form(instance=request.user.post2)
+
+    return render(request, 'main/newcases.html', {'p2form': p2form})
 
 # vaccine
 

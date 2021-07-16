@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container pt-4" style="height: 800px;">
+    <h3 class="text-white mb-5">
+        New update cases on COVID-19
+    </h3>
+    <form method="POST" class="col-12 col-md-6 no-padding pr-3 pr-md-0">
+        {% csrf_token %}
+
+        <fieldset class="form-group text-white">
+            {{ form2 | crispy}}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

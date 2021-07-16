@@ -11,9 +11,20 @@ import json
 
 class post(models.Model):
     text = models.TextField(max_length=300, default='')
-    date_posted = models.DateTimeField(default=timezone.now)
+    date_posted = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-date_posted']
+
+class post2(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(null=True, blank=True)
+    new = models.CharField(max_length=100, default='')
+    cured = models.CharField(max_length=100, default='')
+    totalcases = models.CharField(max_length=100, default='')
+    newdeath = models.CharField(max_length=100, default='')
+    totaldeath = models.CharField(max_length=100, default='')
 
 class vaccine(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -24,7 +24,11 @@ urlpatterns = [
 
 
     path('location/', views.location, name='location'),
-    path('locationsubmit/', views.submit_loc, name='locationsubmit')
+    path('locationsubmit/', views.submit_loc, name='locationsubmit'),
+
+    # path('create2/', views.PostNewsView.as_view(), name='create2')
+    path('post2/', views.post2view, name= 'post2'),
+    path('newcases/', views.post2, name='post2news'),
     
 ]
 
